@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri)
         startActivityForResult(intent, CAMERA_REQUEST_CODE_2)
     }
-    
+
     /*Refer this link about uri used by other apps
     https://stackoverflow.com/q/38200282/7265720
     * Capture larger image */
@@ -186,14 +186,9 @@ class MainActivity : AppCompatActivity() {
                     val realSize = Point()
                     windowManager.defaultDisplay.getSize(size)
                     windowManager.defaultDisplay.getRealSize(realSize)
-                    val displayWidth = size.x //1080
-                    val displayHeight = size.y //2030
 
                     val displayRealWidht = realSize.x // 1080
-                    val displayRealHeight = realSize.y//2160
-
-                    val density = resources.displayMetrics.densityDpi //440 xhdpi
-                    val densityDpi = resources.displayMetrics.density // 2.75
+                    val displayRealHeight = realSize.y //2160
 
                     val bitmapFactoryOptions = BitmapFactory.Options()
                     bitmapFactoryOptions.inJustDecodeBounds = true
@@ -230,7 +225,8 @@ class MainActivity : AppCompatActivity() {
                         getCaptureImageOutputUri()?.let {
                             val bitmap = BitmapFactory.decodeStream(
                                 contentResolver
-                                    .openInputStream(it), null, null)
+                                    .openInputStream(it), null, null
+                            )
 
                             image.setImageBitmap(bitmap)
                         }
@@ -255,10 +251,10 @@ class MainActivity : AppCompatActivity() {
             arrayOf(MediaStore.Audio.Media.DATA)
         val cursor: Cursor? =
             data?.data?.let { contentResolver.query(it, proj, null, null, null) }
-        val column_index: Int =
+        val columnIndex: Int =
             cursor!!.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)
         cursor.moveToFirst()
-        return cursor.getString(column_index)
+        return cursor.getString(columnIndex)
     }
 
     /*
