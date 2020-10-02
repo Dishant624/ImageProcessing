@@ -282,6 +282,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             else -> bitmap
+
+            // test commit
+
         }
     }
 
